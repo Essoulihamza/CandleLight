@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      username: root
+      password: changemeinprod!
+      host: localhost
+      port: 27017
+      database: candlelight
+      authentication-database: admin
