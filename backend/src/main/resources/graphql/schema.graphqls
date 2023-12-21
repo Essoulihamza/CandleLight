@@ -1,0 +1,62 @@
+type Query {
+   users: [User]
+   userById(id: ID!): User
+   posts: [Post]
+   comments: [Comment]
+}
+
+type User {
+    userName: ID!
+    email: String!
+    password: String!
+    posts: [Post]!
+    commentReactions: [CommentReaction]!
+    postReactions: [PostReaction]!
+}
+
+type Post {
+    id: ID!
+    title: String!
+    content: String!
+    media: [Media]!
+    publisher: User!
+    reactions: [PostReaction]!
+    comments: [Comment]!
+}
+
+type Comment {
+    id: ID!
+    content: String!
+    publisher: User!
+}
+
+type PostReaction {
+    id: ID!
+    post: Post!
+    publisher: User!
+    type: ReactionType!
+}
+
+type CommentReaction {
+    id: ID!
+    comment: Comment!
+    publisher: User!
+    type: ReactionType!
+}
+
+type Media {
+    id: ID!
+    post: Post!
+    type: MediaType!
+}
+
+enum ReactionType {
+    FLAME
+    SUPPORT
+    WOW
+}
+
+enum MediaType {
+    IMAGE
+    VIDEO
+}
