@@ -1,15 +1,33 @@
 type Query {
+#    User queries
    users: [User]
-   userById(id: ID!): User
+   userById(userName: ID!): User
+   usersLike(userName: ID!) : [User]!
+
+#    Post queries
    posts: [Post]
-   comments: [Comment]
+   postsByUser(userName: String!): [Post]!
+   postsLike(title: String!) : [Post]!
+   
 }
+
+type Mutation {
+    addUser(userToAdd: UserInput) : User
+}
+
+input UserInput {
+    userName: String!
+    password: String!
+    email: String!
+}
+
 
 type User {
     userName: ID!
     email: String!
     password: String!
-    posts: [Post]!
+    joinedAt: LocalDate!
+    posts: [Post]
     commentReactions: [CommentReaction]!
     postReactions: [PostReaction]!
 }
@@ -20,6 +38,7 @@ type Post {
     content: String!
     media: [Media]!
     publisher: User!
+    createdAt: LocalDateTime!
     reactions: [PostReaction]!
     comments: [Comment]!
 }
@@ -28,6 +47,7 @@ type Comment {
     id: ID!
     content: String!
     publisher: User!
+    publishedAt: LocalDateTime!
 }
 
 type PostReaction {
@@ -60,3 +80,6 @@ enum MediaType {
     IMAGE
     VIDEO
 }
+
+scalar LocalDate
+scalar LocalDateTime
