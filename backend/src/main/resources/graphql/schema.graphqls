@@ -2,45 +2,41 @@ type Query {
 #    User queries
    users: [User]
    userById(userName: ID!): User
-   usersLike(userName: ID!) : [User]!
+   usersLike(userName: ID!): [User]!
 
 #    Post queries
    posts: [Post]
    postsByUser(userName: String!): [Post]!
-   postsLike(title: String!) : [Post]!
-   
+   postsTitleLike(title: String!): [Post]!
 }
 
 type Mutation {
-    addUser(userToAdd: UserInput) : User
+    signUp(newUser: UserSignUpInput) : User!
 }
 
-input UserInput {
+input UserSignUpInput {
     userName: String!
-    password: String!
     email: String!
+    phoneNumber: String!
+    password: String!
 }
-
 
 type User {
     userName: ID!
     email: String!
-    password: String!
+    phoneNumber: String!
     joinedAt: LocalDate!
-    posts: [Post]
-    commentReactions: [CommentReaction]!
-    postReactions: [PostReaction]!
 }
 
 type Post {
     id: ID!
     title: String!
     content: String!
-    media: [Media]!
+    media: [Media!]
     publisher: User!
     createdAt: LocalDateTime!
-    reactions: [PostReaction]!
-    comments: [Comment]!
+    reactions: [PostReaction]
+    comments: [Comment!]
 }
 
 type Comment {

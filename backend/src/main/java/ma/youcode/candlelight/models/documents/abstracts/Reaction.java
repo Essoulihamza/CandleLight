@@ -1,6 +1,7 @@
 package ma.youcode.candlelight.models.documents.abstracts;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,6 +15,7 @@ import ma.youcode.candlelight.models.enums.ReactionType;
 @NoArgsConstructor
 @AllArgsConstructor
 
+@Document(collection = "reactions")
 public abstract class Reaction {
     
     @Id

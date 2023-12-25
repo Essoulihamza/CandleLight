@@ -3,6 +3,7 @@ package ma.youcode.candlelight.configs;
 import java.util.Arrays;
 
 import org.apache.catalina.filters.CorsFilter;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -12,7 +13,12 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class Configurations {
     
     @Bean
-    public CorsFilter corsFilter() {
+    ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
+
+    @Bean
+    CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowCredentials(true);

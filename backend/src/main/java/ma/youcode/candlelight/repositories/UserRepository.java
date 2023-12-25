@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 import ma.youcode.candlelight.models.documents.User;
 
 @Repository
-public interface UserRepository extends MongoRepository<User, String> {}
+public interface UserRepository extends MongoRepository<User, String> {
+
+    public boolean existsByEmailIgnoreCase(String email);
+    public boolean existsByPhoneNumber(String phoneNumber);
+}

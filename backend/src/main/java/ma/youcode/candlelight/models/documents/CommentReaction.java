@@ -15,7 +15,7 @@ import ma.youcode.candlelight.models.documents.abstracts.Reaction;
 @AllArgsConstructor
 @Builder
 
-@Document(collection = "comments_reacts")
+@Document(collection = "reactions")
 public final class CommentReaction extends Reaction {
     
     private Comment comment;

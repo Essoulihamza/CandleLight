@@ -29,7 +29,7 @@ public class User {
     private String phoneNumber;
 
     @CreatedDate
-    private LocalDate joinDate; 
+    private LocalDate joinedAt; 
 
     private List<Post> posts;
     private List<Comment> comments;
