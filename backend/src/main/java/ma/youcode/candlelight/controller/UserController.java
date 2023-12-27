@@ -14,12 +14,12 @@ import lombok.AllArgsConstructor;
 
 @Controller
 public class UserController {
-    
+
     private final UserService service;
 
     @MutationMapping
     public UserDto signUp(final @Argument UserSignUpDto newUser) {
         return service.create(newUser);
     }
-        
+
 }

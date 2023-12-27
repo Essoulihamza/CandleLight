@@ -1,17 +1,18 @@
 type Query {
-#    User queries
-   users: [User]
-   userById(userName: ID!): User
-   usersLike(userName: ID!): [User]!
+    #    User queries
+    users: [User]
+    userById(userName: ID!): User
+    usersLike(userName: ID!): [User]!
 
-#    Post queries
-   posts: [Post]
-   postsByUser(userName: String!): [Post]!
-   postsTitleLike(title: String!): [Post]!
+    #    Post queries
+    posts: [Post]
+    postsByUser(userName: String!): [Post]!
+    postsTitleLike(title: String!): [Post]!
 }
 
 type Mutation {
     signUp(newUser: UserSignUpInput) : User!
+    createMedia(newMedia : MediaInput) : Media!
 }
 
 input UserSignUpInput {
@@ -19,6 +20,12 @@ input UserSignUpInput {
     email: String!
     phoneNumber: String!
     password: String!
+}
+
+input MediaInput {
+    id: ID!
+    url : String!
+    type : MediaType!
 }
 
 type User {
@@ -62,7 +69,7 @@ type CommentReaction {
 
 type Media {
     id: ID!
-    post: Post!
+    url : String!
     type: MediaType!
 }
 

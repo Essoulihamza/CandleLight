@@ -1,6 +1,7 @@
 package ma.youcode.candlelight.models.documents;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -18,7 +19,10 @@ import ma.youcode.candlelight.models.enums.MediaType;
 
 @Document(collection = "media")
 public class Media {
-    
+
+    @Transient
+    private static final String SEQUENCE_NAME = "media_sequence";
+
     @Id
     private Long id;
     private String url;
