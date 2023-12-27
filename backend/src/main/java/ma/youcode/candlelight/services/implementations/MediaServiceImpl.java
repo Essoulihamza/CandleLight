@@ -1,40 +1,66 @@
 package ma.youcode.candlelight.services.implementations;
 
 import lombok.AllArgsConstructor;
+import ma.youcode.candlelight.exceptions.InvalidCredentials;
+import ma.youcode.candlelight.exceptions.ResourceAlreadyExist;
+import ma.youcode.candlelight.exceptions.ResourceNotFound;
 import ma.youcode.candlelight.models.documents.Media;
 import ma.youcode.candlelight.models.dto.Medias.MediaDtoReq;
 import ma.youcode.candlelight.models.dto.Medias.MediaDtoResp;
 import ma.youcode.candlelight.repositories.MediaRepository;
 import ma.youcode.candlelight.services.MediaService;
+import ma.youcode.candlelight.services.SequenceGeneratorService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
 public class MediaServiceImpl implements MediaService {
+
     private MediaRepository mediaRepository;
     private ModelMapper modelMapper;
+    private final SequenceGeneratorService sequenceGenerator;
 
     @Override
     public MediaDtoResp create(MediaDtoReq newElement) {
-        return modelMapper.map(
-                mediaRepository.save(modelMapper.map(newElement, Media.class)),
-                MediaDtoResp.class
-        );
+        Media media = modelMapper.map(newElement, Media.class);
+        media.setId(sequenceGenerator.generateSequence(Media.getSequenceName()));
+        return modelMapper.map(mediaRepository.save(media), MediaDtoResp.class);
+        
     }
 
     @Override
-    public MediaDtoResp update(Long aLong, MediaDtoReq elementBody) {
-        return null;
+    public MediaDtoResp update(MediaDtoReq newElement) {
+        if (newElement.getId() != null) {
+            Optional<Media> mediaToUpdate = this.mediaRepository.findById(newElement.getId());
+            if (mediaToUpdate.isPresent()) {
+                Media media = this.modelMapper.map(newElement, Media.class);
+                media.setId(mediaToUpdate.get().getId());
+                return this.modelMapper.map(this.mediaRepository.save(media), MediaDtoResp.class);
+            }
+            throw new ResourceNotFound("Media with id " + newElement.getId() + " Not Exist");
+        }
+        throw new ResourceNotFound("There's no Id to update");
     }
 
     @Override
     public MediaDtoResp findById(Long aLong) {
-        return null;
+        Optional<Media> mediaToUpdate = this.mediaRepository.findById(aLong);
+        if (mediaToUpdate.isPresent()) {
+            return this.modelMapper.map(mediaToUpdate.get(), MediaDtoResp.class);
+        }
+        throw new ResourceNotFound("Media with id " + aLong + " Not Exist");
     }
 
     @Override
-    public MediaDtoResp delete(Long aLong) {
-        return null;
+    public String delete(Long aLong) {
+        Optional<Media> mediaToUpdate = this.mediaRepository.findById(aLong);
+        if (mediaToUpdate.isPresent()) {
+            this.modelMapper.map(mediaToUpdate.get(), MediaDtoResp.class);
+            return "Media with id " + aLong + " Deleted successfully";
+        }
+        throw new ResourceNotFound("Media with id " + aLong + " Not Exist");
     }
 }

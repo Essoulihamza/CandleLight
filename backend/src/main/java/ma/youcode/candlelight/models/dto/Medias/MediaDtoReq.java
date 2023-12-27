@@ -13,4 +13,4 @@ public class MediaDtoReq {
     private String url;
     @NotBlank(message = "Media Type Must Be Not Blank")
     private MediaType type;
-}
+}   

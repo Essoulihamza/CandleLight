@@ -13,6 +13,7 @@ type Query {
 type Mutation {
     signUp(newUser: UserSignUpInput) : User!
     createMedia(newMedia : MediaInput) : Media!
+    updateMedia(Media : MediaInput) : Media!
 }
 
 input UserSignUpInput {
@@ -23,7 +24,6 @@ input UserSignUpInput {
 }
 
 input MediaInput {
-    id: ID!
     url : String!
     type : MediaType!
 }

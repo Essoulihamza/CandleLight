@@ -2,7 +2,6 @@ package ma.youcode.candlelight.models.dto.Medias;
 
 import lombok.Getter;
 import lombok.Setter;
-import ma.youcode.candlelight.models.dto.posts.PostDtoReq;
 import ma.youcode.candlelight.models.enums.MediaType;
 
 @Getter

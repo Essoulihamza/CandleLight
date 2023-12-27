@@ -23,6 +23,10 @@ public class Media {
     @Transient
     private static final String SEQUENCE_NAME = "media_sequence";
 
+    public static String getSequenceName() {
+        return SEQUENCE_NAME;
+    }
+
     @Id
     private Long id;
     private String url;
