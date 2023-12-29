@@ -1,17 +1,36 @@
-type Query {
-#    User queries
-   users: [User]
-   userById(userName: ID!): User
-   usersLike(userName: ID!): [User]!
-
-#    Post queries
-   posts: [Post]
-   postsByUser(userName: String!): [Post]!
-   postsTitleLike(title: String!): [Post]!
+#User
+type User {
+    id: ID!
+    userName: String!
+    email: String!
+    phoneNumber: String!
+    joinedAt: LocalDate!
 }
 
+type Query {
+   userById(userName: ID!): User
+   usersLike(userName: ID!): [User]!
+}
+
+#User mutation
+
 type Mutation {
-    signUp(newUser: UserSignUpInput) : User!
+    signUp(newUser: UserSignUpInput) : User
+    login(user: UserLoginInput) : User
+    updateUser(id: ID!, user: UserUpdateInput) : User
+    deleteUser(id: ID!): String!
+}
+
+input UserLoginInput {
+    userName: String!
+    password: String!
+}
+
+input UserUpdateInput {
+    userName: String
+    email: String
+    phoneNumber: String
+    password: String
 }
 
 input UserSignUpInput {
@@ -21,12 +40,12 @@ input UserSignUpInput {
     password: String!
 }
 
-type User {
-    userName: ID!
-    email: String!
-    phoneNumber: String!
-    joinedAt: LocalDate!
-}
+
+
+
+
+
+#----------------------------------------------------------------------------------------------------------------------
 
 type Post {
     id: ID!
