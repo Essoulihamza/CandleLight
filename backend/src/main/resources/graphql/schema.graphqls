@@ -1,0 +1,125 @@
+
+type Query {
+    #    User queries
+    users: [User]
+    userById(userName: ID!): User
+    usersLike(userName: ID!): [User]!
+
+    #    Post queries
+    posts: [Post]
+    postsByUser(userName: ID!): [Post]!
+    postsTitleLike(title: String!): [Post]!
+    deletePost(aLong : ID!):String!
+    PaginatePost(page : Int!, pageSize : Int!) : [Post]!
+
+
+    #    Media queries
+    Medias(page: Int!, pageSize: Int!): [Media]!
+    MediaById (id : ID!): Media
+    MediasByPost : [Media]
+    deleteMedia(id : Int) : String!
+}
+
+#User mutation
+
+type Mutation {
+    createMedia(newMedia : MediaInput) : Media!
+    updateMedia(Media : MediaInput) : Media!
+    createPost(newPost : PostInput) : Post!
+    updatePost(Post : PostInput, id : ID!) : Post!
+
+    signUp(newUser: UserSignUpInput) : User
+    login(user: UserLoginInput) : User
+    updateUser(id: ID!, user: UserUpdateInput) : User
+    deleteUser(id: ID!): String!
+}
+
+input UserLoginInput {
+    userName: String!
+    password: String!
+}
+
+input UserUpdateInput {
+    userName: String
+    email: String
+    phoneNumber: String
+    password: String
+}
+
+input UserSignUpInput {
+    userName: String!
+    email: String!
+    phoneNumber: String!
+    password: String!
+}
+
+input PostInput {
+    title : String!
+    content : String!
+    Tags : [String]
+    publisher : String!
+}
+
+input MediaInput {
+    url : String!
+    type : MediaType!
+}
+
+type User {
+    id: ID!
+    userName: String!
+    email: String!
+    phoneNumber: String!
+    joinedAt: LocalDate!
+}
+
+
+type Post {
+    id : ID!
+    title : String!
+    content : String!
+    publishTime :LocalDateTime
+    Tags : [String]
+    publisher : User!
+}
+
+type Comment {
+    id: ID!
+    content: String!
+    publisher: User!
+    publishedAt: LocalDateTime!
+}
+
+type PostReaction {
+    id: ID!
+    post: Post!
+    publisher: User!
+    type: ReactionType!
+}
+
+type CommentReaction {
+    id: ID!
+    comment: Comment!
+    publisher: User!
+    type: ReactionType!
+}
+
+type Media {
+    id: ID!
+    url : String!
+    type: MediaType!
+}
+
+enum ReactionType {
+    FLAME
+    SUPPORT
+    WOW
+}
+
+enum MediaType {
+    IMAGE
+    VIDEO
+}
+
+scalar LocalDate
+scalar LocalDateTime
