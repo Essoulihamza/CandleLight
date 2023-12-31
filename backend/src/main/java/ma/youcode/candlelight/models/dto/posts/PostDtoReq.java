@@ -1,12 +1,12 @@
 package ma.youcode.candlelight.models.dto.posts;
 
-import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -19,11 +19,11 @@ public class PostDtoReq {
     @NotBlank(message = "Content must Be Not Blank")
     private String content;
 
-    @FutureOrPresent(message = "PublishTime Must Be on Present")
-    private LocalDateTime publishTime;
+//    @FutureOrPresent(message = "PublishTime Must Be on Present")
+//    private LocalDateTime publishTime;
 
     @NotNull(message = "Tags must be Not Null")
-    private String[] Tags;
+    private List<String> Tags;
 
     @NotNull(message = "Publisher must be Not Null")
     private String publisher;

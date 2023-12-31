@@ -11,6 +11,8 @@ import ma.youcode.candlelight.repositories.MediaRepository;
 import ma.youcode.candlelight.services.MediaService;
 import ma.youcode.candlelight.services.SequenceGeneratorService;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -28,7 +30,7 @@ public class MediaServiceImpl implements MediaService {
         Media media = modelMapper.map(newElement, Media.class);
         media.setId(sequenceGenerator.generateSequence(Media.getSequenceName()));
         return modelMapper.map(mediaRepository.save(media), MediaDtoResp.class);
-        
+
     }
 
     @Override
@@ -55,12 +57,19 @@ public class MediaServiceImpl implements MediaService {
     }
 
     @Override
+    public Page<MediaDtoResp> getAllWithPagination(Pageable pageable) {
+        Page<Media> medias = mediaRepository.findAll(pageable);
+        return medias.map(media -> modelMapper.map(media, MediaDtoResp.class));
+    }
+
+    @Override
     public String delete(Long aLong) {
         Optional<Media> mediaToUpdate = this.mediaRepository.findById(aLong);
         if (mediaToUpdate.isPresent()) {
-            this.modelMapper.map(mediaToUpdate.get(), MediaDtoResp.class);
+            this.mediaRepository.deleteById(mediaToUpdate.get().getId());
             return "Media with id " + aLong + " Deleted successfully";
         }
         throw new ResourceNotFound("Media with id " + aLong + " Not Exist");
     }
+
 }

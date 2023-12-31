@@ -8,12 +8,23 @@ type Query {
     posts: [Post]
     postsByUser(userName: String!): [Post]!
     postsTitleLike(title: String!): [Post]!
+    deletePost(aLong : ID!):String!
+    PaginatePost(page : Int!, pageSize : Int!) : [Post]!
+
+
+    #    Media queries
+    Medias(page: Int!, pageSize: Int!): [Media]!
+    MediaById (id : ID!): Media
+    MediasByPost : [Media]
+    deleteMedia(id : Int) : String!
 }
 
 type Mutation {
     signUp(newUser: UserSignUpInput) : User!
     createMedia(newMedia : MediaInput) : Media!
     updateMedia(Media : MediaInput) : Media!
+    createPost(newPost : PostInput) : Post!
+    updatePost(Post : PostInput, id : ID!) : Post!
 }
 
 input UserSignUpInput {
@@ -21,6 +32,13 @@ input UserSignUpInput {
     email: String!
     phoneNumber: String!
     password: String!
+}
+
+input PostInput {
+    title : String!
+    content : String!
+    Tags : [String]
+    publisher : String!
 }
 
 input MediaInput {
@@ -36,14 +54,12 @@ type User {
 }
 
 type Post {
-    id: ID!
-    title: String!
-    content: String!
-    media: [Media!]
-    publisher: User!
-    createdAt: LocalDateTime!
-    reactions: [PostReaction]
-    comments: [Comment!]
+    id : ID!
+    title : String!
+    content : String!
+    publishTime :LocalDateTime
+    Tags : [String]
+    publisher : User!
 }
 
 type Comment {
