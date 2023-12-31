@@ -2,14 +2,11 @@ package ma.youcode.candlelight.services.implementations;
 
 import lombok.AllArgsConstructor;
 import ma.youcode.candlelight.exceptions.ResourceNotFound;
-import ma.youcode.candlelight.models.documents.Media;
 import ma.youcode.candlelight.models.documents.Post;
 import ma.youcode.candlelight.models.documents.User;
-import ma.youcode.candlelight.models.dto.Medias.MediaDtoResp;
 import ma.youcode.candlelight.models.dto.posts.PostDtoInsertion;
 import ma.youcode.candlelight.models.dto.posts.PostDtoReq;
 import ma.youcode.candlelight.models.dto.posts.PostDtoResp;
-import ma.youcode.candlelight.repositories.MediaRepository;
 import ma.youcode.candlelight.repositories.PostRepository;
 import ma.youcode.candlelight.repositories.UserRepository;
 import ma.youcode.candlelight.services.PostService;
@@ -86,8 +83,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDtoResp> PostsByUser(String UserName) {
-        Optional<User> user = this.userRepository.findById(UserName);
+    public List<PostDtoResp> PostsByUser(Long id) {
+        Optional<User> user = this.userRepository.findById(id);
         if (user.isPresent()) {
             List<Post> posts = this.postRepository.findPostsByPublisher(user.get());
             if (posts != null) {

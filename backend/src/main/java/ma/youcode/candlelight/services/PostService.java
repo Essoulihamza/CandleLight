@@ -20,7 +20,7 @@ public interface PostService {
 
     Page<PostDtoResp> getAllWithPagination(Pageable pageable);
 
-    List<PostDtoResp> PostsByUser(String UserName);
+    List<PostDtoResp> PostsByUser(Long id);
 
     List<PostDtoResp> searchByTitle(String title);
 }

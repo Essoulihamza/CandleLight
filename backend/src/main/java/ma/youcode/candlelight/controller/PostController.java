@@ -52,8 +52,8 @@ public class PostController {
     }
 
     @QueryMapping
-    public List<PostDtoResp> postsByUser(final @Argument String userName) {
-        return this.postService.PostsByUser(userName);
+    public List<PostDtoResp> postsByUser(final @Argument Long id) {
+        return this.postService.PostsByUser(id);
     }
 
     @QueryMapping

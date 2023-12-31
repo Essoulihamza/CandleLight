@@ -26,5 +26,5 @@ public class PostDtoReq {
     private List<String> Tags;
 
     @NotNull(message = "Publisher must be Not Null")
-    private String publisher;
+    private Long publisher;
 }
