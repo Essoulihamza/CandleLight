@@ -17,6 +17,6 @@ import ma.youcode.candlelight.models.documents.abstracts.Reaction;
 
 @Document(collection = "reactions")
 public final class PostReaction extends Reaction {
-    
+
     private Post post;
 }
