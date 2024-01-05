@@ -38,10 +38,7 @@ public class PostController {
     }
 
     @QueryMapping
-    public Page<PostDtoResp> PaginatePost(@Argument(name = "page") Integer page, @Argument(name = "pageSize") Integer pageSize) {
-        page = page != null ? page : 0;
-        pageSize = pageSize != null ? pageSize : 10;
-
+    public Page<PostDtoResp> PaginatePost(@Argument(name = "page", value = 0) Integer page, @Argument(name = "pageSize", value = 10) Integer pageSize) {
         Pageable pageable = PageRequest.of(page, pageSize);
         return this.postService.getAllWithPagination(pageable);
     }
