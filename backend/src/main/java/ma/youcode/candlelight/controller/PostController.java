@@ -44,7 +44,7 @@ public class PostController {
     }
 
     @QueryMapping
-    public PostDtoResp findById(final @Argument Long id) {
+    public PostDtoResp postById(final @Argument Long id) {
         return this.postService.findById(id);
     }
 

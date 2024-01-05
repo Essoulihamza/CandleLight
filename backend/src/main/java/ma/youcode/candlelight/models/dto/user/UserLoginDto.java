@@ -23,4 +23,4 @@ public class UserLoginDto {
     @NotEmpty(message = "User password must not be empty.")
     @Size(min = 6, max = 30, message = "User password must be between 6 and 30 character.")
     private String password;
-}
+}   
