@@ -2,7 +2,7 @@ import { createAction, props } from "@ngrx/store";
 import { Post, PostInput } from "src/app/Types/PostTypes";
 
 export const createPost = createAction(
-    '[Post] createPost',
+    '[Post] creatvPost',
     props<{ post: PostInput }>()
 );
 

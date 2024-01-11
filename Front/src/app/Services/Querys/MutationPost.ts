@@ -36,3 +36,29 @@ mutation ($updatePost : PostInput! , $id : ID!){
   }
 }
 `;
+
+export const USER_LOGIN = gql`
+mutation ($user : UserLoginInput!){
+  login(
+    user: $user
+  ) {
+    id
+    userName
+    email
+    phoneNumber
+  }
+}
+`;
+
+export const USER_SIGNUP = gql`
+mutation ($user : UserSignUpInput!){
+  signUp(
+    user: $user
+  ) {
+    id
+    userName
+    email
+    phoneNumber
+  }
+}
+`;

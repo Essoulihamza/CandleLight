@@ -56,3 +56,15 @@ export const UPDATE_POST = gql`
     }
   }
   `;
+
+
+export const SEARCH_USERS_BY_USER_NAME_LIKE = gql`
+     query ($userName: String!) {
+        searchUsersByUserNameLike(userName : $userName){
+          id
+          userName
+          email
+          phoneNumber    
+        }
+   }
+`;

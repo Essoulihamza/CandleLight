@@ -6,6 +6,11 @@ export interface User {
     joinedAt: Date
 }
 
+export interface UserLoginInput {
+    userName: string
+    password: string
+}
+
 export interface UserSignUpInput {
     userName: string
     email: string
